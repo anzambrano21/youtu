@@ -26,9 +26,6 @@ export const adimistrador=()=>{
 
             </div>
 
-            
-          </div>
-
         
         
         
