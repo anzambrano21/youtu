@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation,Link } from 'react-router-dom';
+import '../../css/app.css'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -25,8 +26,8 @@ export const Inicio = () => {
 
     }
     return (
-        <div className="container">
-
+        <div className="container1">
+            <Navega/>
 
             <div className="tab-content">
                 <div className="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
@@ -158,7 +159,8 @@ export const Registro = () => {
 
     }
     return (
-        <div className="container">
+        <div className="container1">
+            <Navega/>
             <div className="tab-content">
             <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                 <form>

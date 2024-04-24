@@ -9,14 +9,14 @@ import {Adimistrador} from "./adimistrador";
 function Prin() {
     return (
         <BrowserRouter>
-            <div className="container1">
+            
             <Routes>
                 <Route path='/' element={<Inicio/>}/>
                 <Route path='/registro' element={<Registro/>} />
                 <Route path='/admin' element={<Adimistrador/>}/>
             </Routes>
 
-            </div>
+            
         </BrowserRouter>
     );
 }
