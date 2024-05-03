@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -22,7 +23,24 @@ class usuarioControler extends Controller
     }
     public function store(Request $request)
     {
+                
+        $request->validate([
+            'nombreUser' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:3',
+        ]);
+        
+        $user = usuario::create([
+            'nombreUser' => $request->nombreUser,
+            'email' => $request->email,
+            'password' =>  Hash::make($request->password),
+        ]);
+        
 
+        return response()->json([
+            'message' => 'User registered successfully',
+            'user' => $user
+        ]);
 
     }
     public function show(usuario $usuario)
@@ -32,23 +50,21 @@ class usuarioControler extends Controller
     }
     public function log(Request $request)
     {
-        try {
-            $credentials = $request->only('nombreUser', 'contraseña');
-    
-            $exists = DB::table('usuarios')
-                ->where('nombreUser', $credentials['nombreUser'])
-                ->where('contraseña', $credentials['contraseña'])
-                ->exists();
-            if ($exists) {
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+            
+            $request->setLaravelSession(session());
 
-                  
-            } else {
-                return false;
-            }
-        } catch (\Exception $e) {
-            // Aquí puedes manejar el error como prefieras
-            return response()->json(['error' => 'Hubo un problema con la sesión'], 500);
+            
+            return response()->json([
+                'message' => 'Login successful'
+            ]);
         }
+
+        return response()->json([
+            'message' => 'Invalid credentials'
+        ], 401);
     }
     
 

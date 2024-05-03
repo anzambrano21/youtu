@@ -6,6 +6,7 @@ import { Inicio, Navega,Registro } from './inicio'
 import {Adimistrador} from "./adimistrador";
 
 
+
 function Prin() {
     return (
         <BrowserRouter>

@@ -1,33 +1,28 @@
 import React from 'react';
-import { useLocation,Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import '../../css/app.css'
-
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
 
 export const Inicio = () => {
-    const iniciar=()=>{
-        let user=document.getElementById("loginName").value;
-        let pasw=document.getElementById("loginPassword").value;
-        let usur={
-            nombreUser:user,
-            contraseña:pasw
+    const iniciar = async () => {
+        let user = document.getElementById("loginName").value;
+        let pasw = document.getElementById("loginPassword").value;
+        let usur = {
+            email: user,
+            password: pasw
         }
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(usur)
-        };
-        fetch('http://127.0.0.1:8000/api/log', requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result));
+        const response = await axios.post('/api/log', usur);
+
+        console.log(response.data);
 
 
     }
     return (
         <div className="container1">
-            <Navega/>
+            <Navega />
 
             <div className="tab-content">
                 <div className="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
@@ -98,23 +93,25 @@ export const Inicio = () => {
 
 export const Navega = () => {
     const location = useLocation();
-  
-  let estilo={};
-  let estilo2={};
 
-  switch(location.pathname) {
-    case '/':
-      estilo = { background: 'blue',color: 'white' };
-      break;
-    case '/registro':
-      estilo2 = { background: 'blue',
-                color: 'white'};
-      break;
-    default:
-      
-  }
-  
-    
+    let estilo = {};
+    let estilo2 = {};
+
+    switch (location.pathname) {
+        case '/':
+            estilo = { background: 'blue', color: 'white' };
+            break;
+        case '/registro':
+            estilo2 = {
+                background: 'blue',
+                color: 'white'
+            };
+            break;
+        default:
+
+    }
+
+
     return (
         <div className="container">
             <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -132,95 +129,93 @@ export const Navega = () => {
 
 }
 export const Registro = () => {
-    const guardar=()=>{
-        let user=document.getElementById("registerUsername").value;
-        let emai=document.getElementById("registerEmail").value;
-        let pasw1=document.getElementById("registerPassword").value
-        let pasw2=document.getElementById("registerRepeatPassword").value
+
+    const guardar = async () => {
+        let user = document.getElementById("registerUsername").value;
+        let emai = document.getElementById("registerEmail").value;
+        let pasw1 = document.getElementById("registerPassword").value
+        let pasw2 = document.getElementById("registerRepeatPassword").value
         let pswd
-        if (pasw1===pasw2){
-            pswd=pasw1;
+        if (pasw1 === pasw2) {
+            pswd = pasw1;
         }
-        let guar={
-            nombreUser:user,
-            email:emai,
-            contraseña:pswd
+        let guar = {
+            nombreUser: user,
+            email: emai,
+            password: pswd
         }
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(guar)
-        };
-        fetch('http://127.0.0.1:8000/api/usuario', requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result));
-    
-      
+
+        const response = await axios.post('/api/usuario', guar);
+
+        console.log(response.data);
+
+
+
 
     }
     return (
         <div className="container1">
-            <Navega/>
+            <Navega />
             <div className="tab-content">
-            <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                <form>
-                    <div className="text-center mb-3">
-                        <p>Sign up with:</p>
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
-                            <i className="fab fa-facebook-f"></i>
-                        </button>
+                <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                    <form>
+                        <div className="text-center mb-3">
+                            <p>Sign up with:</p>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+                                <i className="fab fa-facebook-f"></i>
+                            </button>
 
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
-                            <i className="fab fa-google"></i>
-                        </button>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+                                <i className="fab fa-google"></i>
+                            </button>
 
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
-                            <i className="fab fa-twitter"></i>
-                        </button>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+                                <i className="fab fa-twitter"></i>
+                            </button>
 
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
-                            <i className="fab fa-github"></i>
-                        </button>
-                    </div>
-                    <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="text" id="registerUsername" className="form-control" />
-                        <label className="form-label" htmlFor="registerUsername">Username</label>
-                    </div>
-
-
-                    <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="email" id="registerEmail" className="form-control" />
-                        <label className="form-label" htmlFor="registerEmail">Email</label>
-                    </div>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
+                                <i className="fab fa-github"></i>
+                            </button>
+                        </div>
+                        <div data-mdb-input-init className="form-outline mb-4">
+                            <input type="text" id="registerUsername" className="form-control" />
+                            <label className="form-label" htmlFor="registerUsername">Username</label>
+                        </div>
 
 
-                    <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="password" id="registerPassword" className="form-control" />
-                        <label className="form-label" htmlFor="registerPassword">Password</label>
-                    </div>
+                        <div data-mdb-input-init className="form-outline mb-4">
+                            <input type="email" id="registerEmail" className="form-control" />
+                            <label className="form-label" htmlFor="registerEmail">Email</label>
+                        </div>
 
 
-                    <div data-mdb-input-init className="form-outline mb-4">
-                        <input type="password" id="registerRepeatPassword" className="form-control" />
-                        <label className="form-label" htmlFor="registerRepeatPassword">Repeat password</label>
-                    </div>
+                        <div data-mdb-input-init className="form-outline mb-4">
+                            <input type="password" id="registerPassword" className="form-control" />
+                            <label className="form-label" htmlFor="registerPassword">Password</label>
+                        </div>
 
 
-                    <div className="form-check d-flex justify-content-center mb-4">
-                        <input className="form-check-input me-2" type="checkbox" value="" id="registerCheck"
-                            aria-describedby="registerCheckHelpText" />
-                        <label className="form-check-label" htmlFor="registerCheck">
-                            I have read and agree to the terms
-                        </label>
-                    </div>
+                        <div data-mdb-input-init className="form-outline mb-4">
+                            <input type="password" id="registerRepeatPassword" className="form-control" />
+                            <label className="form-label" htmlFor="registerRepeatPassword">Repeat password</label>
+                        </div>
 
 
-                    <button type="button" onClick={guardar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-3">Sign in</button>
-                </form>
+                        <div className="form-check d-flex justify-content-center mb-4">
+                            <input className="form-check-input me-2" type="checkbox" value="" id="registerCheck"
+                                aria-describedby="registerCheckHelpText" />
+                            <label className="form-check-label" htmlFor="registerCheck">
+                                I have read and agree to the terms
+                            </label>
+                        </div>
+
+
+                        <button type="button" onClick={guardar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-3">Sign in</button>
+                    </form>
+                </div>
             </div>
         </div>
-        </div>
-        
+
     );
 
 }

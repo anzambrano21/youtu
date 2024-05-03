@@ -19,4 +19,5 @@ use App\Http\Controllers\usuarioControler;
     return $request->user();
 });*/
 Route::apiResource('usuario',usuarioControler::class);
-Route::post('/log', [usuarioControler::class,'log']);
+Route::match(['get', 'post'], '/log', [usuarioControler::class,'log']);
+
