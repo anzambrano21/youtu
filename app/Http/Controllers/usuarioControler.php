@@ -22,13 +22,6 @@ class usuarioControler extends Controller
     }
     public function store(Request $request)
     {
-        $usua = new usuario;
-        $usua->nombreUser = $request->nombreUser;
-        $usua->email = $request->email;
-        $usua->contraseña = $request->contraseña;
-        $usua->save();
-        Auth::login($usua);
-        return $usua;
 
 
     }
