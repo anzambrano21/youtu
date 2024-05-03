@@ -19,4 +19,4 @@ use App\Http\Controllers\usuarioControler;
     return $request->user();
 });*/
 Route::apiResource('usuario',usuarioControler::class);
-Route::post('/login', [usuarioControler::class,'login']);
+Route::post('/log', [usuarioControler::class,'log']);

@@ -27,6 +27,7 @@ class usuarioControler extends Controller
         $usua->email = $request->email;
         $usua->contraseña = $request->contraseña;
         $usua->save();
+        Auth::login($usua);
         return $usua;
 
 
@@ -36,21 +37,26 @@ class usuarioControler extends Controller
         return $usuario;
 
     }
-    public function login(Request $request)
+    public function log(Request $request)
     {
-        $credentials = $request->only('nombreUser', 'contraseña');
+        try {
+            $credentials = $request->only('nombreUser', 'contraseña');
+    
+            $exists = DB::table('usuarios')
+                ->where('nombreUser', $credentials['nombreUser'])
+                ->where('contraseña', $credentials['contraseña'])
+                ->exists();
+            if ($exists) {
 
-        $exists = DB::table('usuarios')
-            ->where('nombreUser', $credentials['nombreUser'])
-            ->where('contraseña', $credentials['contraseña'])
-            ->exists();
-        if ($exists) {
-            return "true";
-        } else {
-            return false;
+                  
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            // Aquí puedes manejar el error como prefieras
+            return response()->json(['error' => 'Hubo un problema con la sesión'], 500);
         }
-
-
     }
+    
 
 }
