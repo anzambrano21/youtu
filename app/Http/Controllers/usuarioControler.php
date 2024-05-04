@@ -57,9 +57,7 @@ class usuarioControler extends Controller
             $request->setLaravelSession(session());
 
             
-            return response()->json([
-                'message' => 'Login successful'
-            ]);
+            return redirect('/admin');
         }
 
         return response()->json([
