@@ -57,12 +57,18 @@ class usuarioControler extends Controller
             $request->setLaravelSession(session());
 
             
-            return redirect('/admin');
+            return response()->json([
+                'message' => 'Login successful'
+            ]);
         }
 
         return response()->json([
             'message' => 'Invalid credentials'
         ], 401);
+    }
+    public function getSesion(Request $request){
+        
+        return response()->json($request->session()->all());
     }
     
 

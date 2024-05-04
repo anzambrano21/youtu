@@ -16,7 +16,12 @@ export const Inicio = () => {
         }
         const response = await axios.post('/api/log', usur);
 
-        console.log(response.data);
+        if (response.data.message === 'Login successful') {
+            // Redirige al usuario a la página deseada
+            window.location.href = '/admin';
+        } else {
+            console.log(response.data);
+        }
 
 
     }

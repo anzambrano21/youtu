@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Inicio, Navega,Registro } from './inicio'
 import {Adimistrador} from "./adimistrador";
-
+import SessionContext from "./contextos"
 
 
 function Prin() {
+    const [sessionData, setSessionData] = useState(null);
+
+    useEffect(() => {
+        axios.get('/api/secion')
+            .then(response => {
+                setSessionData(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
     return (
         <BrowserRouter>
             
