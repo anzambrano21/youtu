@@ -15,7 +15,7 @@ class usuarioControler extends Controller
     public function index()
     {
 
-        $wallet = usuario::all();
+        $wallet = usuario::where("admin",0)->get();
         return response()->json($wallet);
 
 
@@ -34,6 +34,7 @@ class usuarioControler extends Controller
             'nombreUser' => $request->nombreUser,
             'email' => $request->email,
             'password' =>  Hash::make($request->password),
+            
         ]);
         
 
@@ -54,9 +55,14 @@ class usuarioControler extends Controller
         
         if (Auth::attempt($credentials)) {
             $user = usuario::where('email', $credentials['email'])->first();
-            Session::put("email",$request["email"]);
-            Session::put("user",$user["nombreUser"]);
-            Session::put("home","Login successful");  
+
+            if($user["est"]=="activado"){
+                Session::put("email",$request["email"]);
+                Session::put("user",$user["nombreUser"]);
+                Session::put("home","Login successful"); 
+                return Session::all();
+            }
+            Session::put("home","Invalid credentials");
 
      
             return Session::all();
@@ -70,15 +76,22 @@ class usuarioControler extends Controller
         
         return Session::all() ;
     }
-    public function update(Request $request){
-        $registro = usuario::find($request);
+    public function update(Request $request,$id){
+        $registro = usuario::find($id);
 
         // Actualiza los campos necesarios
-        $registro->campo1 = $request->campo1;
-        $registro->campo2 = $request->campo2;
+        if ($registro->est=="activado"){
+            
+            $registro->est = "desactivado";
+        }else{
+            $registro->est = "activado";
+        }
+        
+        
     
         // Guarda los cambios en la base de datos
         $registro->save();
+        return "listo";
     }
     
 

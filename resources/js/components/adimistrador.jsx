@@ -3,22 +3,17 @@ import { useState, useEffect } from 'react';
 import '../../css/admin.css'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import  {Exaplecontect}from "../context/contexto"
+import { Exaplecontect } from "../context/contexto"
 
 const itemsPerPage = 5;
 let res = await fetch('http://127.0.0.1:8000/api/usuario');
 let myData = await res.json();
 let data2 = myData;
-const fetchData = async () => {
-  res = await fetch('http://127.0.0.1:8000/api/usuario');
-  myData = await res.json();
-  data2 = myData
-
-};
+console.log(data2);
 
 
 export const Adimistrador = () => {
-  const example=useContext(Exaplecontect)
+  const example = useContext(Exaplecontect)
   console.log(example);
   return (
     <div >
@@ -78,15 +73,11 @@ export const CutomTable = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  const eliminarRegistro = (id) => {
-    fetch(`http://127.0.0.1:8000/api/wallet/${id}`, {
-      method: 'POST',
+  const actualizar = (id) => {
+    fetch(`http://127.0.0.1:8000/api/usuario/${id}`, {
+      method: 'PUT',
     })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch((error) => console.error('Error:', error));
-    fetchData();
-    handlePageChange(1)
+    window.location.reload();
   }
 
   // Función para filtrar los datos según el término de búsqueda
@@ -111,12 +102,29 @@ export const CutomTable = () => {
 
             {currentData.map((item) => (
 
-              <tr>
+              <tr key={item.id} >
 
                 <td>{item.nombreUser}</td>
                 <td>{item.email}</td>
                 <td><button className="btn btn-warning" onClick={() => dataedit = item}>Editar</button></td>
-                <td><button className="btn btn-danger" onClick={() => eliminarRegistro(item.id)}>Eliminar</button></td>
+                <td>
+
+                  {item.est === 'activado' ? (
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => actualizar(item.id)}
+                    >
+                      desactivar
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success"
+                      onClick={() => actualizar(item.id)}
+                    >
+                      Activar
+                    </button>
+                  )}
+                  </td>
               </tr>
             ))}
           </tbody>

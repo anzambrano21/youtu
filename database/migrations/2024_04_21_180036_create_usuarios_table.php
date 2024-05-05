@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->text("nombreUser");
             $table->text("email");
-            $table->text("contraseña");
-            $table->text("estado");
+            $table->text("password");
+            $table->text("est")->default('activado');
+            $table->boolean("admin")->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('usuario');
     }
 };

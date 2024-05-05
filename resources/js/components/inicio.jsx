@@ -18,14 +18,14 @@ export const Inicio = () => {
             password: pasw
         }
         const response = await axios.post('/api/log', usur);
-        console.log(response);
+        
         example.setDatos(response.data)
-        console.log(example);
+        
         if (response.data.home === 'Login successful') {
             // Redirige al usuario a la página deseada
             window.location.href = '/admin';
         } else {
-            console.log(response);
+            alert("inicio de secion fallida");
         }
 
 
