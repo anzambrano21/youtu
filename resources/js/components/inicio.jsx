@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import '../../css/app.css'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import  {Exaplecontect} from "../context/contexto"
 
 
 export const Inicio = () => {
+    const example=useContext(Exaplecontect)
+
+
     const iniciar = async () => {
         let user = document.getElementById("loginName").value;
         let pasw = document.getElementById("loginPassword").value;
@@ -15,12 +18,14 @@ export const Inicio = () => {
             password: pasw
         }
         const response = await axios.post('/api/log', usur);
-
-        if (response.data.message === 'Login successful') {
+        console.log(response);
+        example.setDatos(response.data)
+        console.log(example);
+        if (response.data.home === 'Login successful') {
             // Redirige al usuario a la página deseada
             window.location.href = '/admin';
         } else {
-            console.log(response.data);
+            console.log(response);
         }
 
 

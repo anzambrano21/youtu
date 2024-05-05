@@ -1,8 +1,10 @@
 // Recupera los datos del usuario de sessionStorage
-const user = JSON.parse(window.sessionStorage.getItem('user'));
-export const Principal=()=>{
-    const user = JSON.parse(window.sessionStorage.getItem('user'));
-    console.log(user);
-    return(<div></div>)
+import React, { useContext } from 'react';
+import { Exaplecontect } from "../context/contexto"
+export const Principal = () => {
+  const example = useContext(Exaplecontect)
+  console.log(example);
+  
+  return (<div></div>)
 
 }

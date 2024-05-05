@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Inicio, Navega,Registro } from './inicio'
 import {Adimistrador} from "./adimistrador";
-import SessionContext from "./contextos"
+import ExamplecontexProvier, {Exaplecontect}from "../context/contexto"
+import {Principal} from "./principal"
+
 
 
 function Prin() {
-    const [sessionData, setSessionData] = useState(null);
+    const example=useContext(Exaplecontect)
 
-    useEffect(() => {
-        axios.get('/api/secion')
-            .then(response => {
-                setSessionData(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, []);
     return (
         <BrowserRouter>
             
@@ -26,6 +19,7 @@ function Prin() {
                 <Route path='/' element={<Inicio/>}/>
                 <Route path='/registro' element={<Registro/>} />
                 <Route path='/admin' element={<Adimistrador/>}/>
+                <Route path='/home' element={<Principal/>}/>
             </Routes>
 
             
@@ -39,8 +33,8 @@ if (document.getElementById('inicio')) {
     const Index = ReactDOM.createRoot(document.getElementById("inicio"));
 
     Index.render(
-        <React.StrictMode>
+        <ExamplecontexProvier>
             <Prin />
-        </React.StrictMode>
+        </ExamplecontexProvier>
     )
 }

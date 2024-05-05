@@ -1,3 +1,7 @@
+ 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,7 @@
     <title>inicio de secion</title>
 </head>
 <body>
+
     <div id= inicio></div>
     @viteReactRefresh
     @vite('resources/js/app.js')

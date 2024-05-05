@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\usuario;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -53,13 +53,13 @@ class usuarioControler extends Controller
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
-            
-            $request->setLaravelSession(session());
+            $user = usuario::where('email', $credentials['email'])->first();
+            Session::put("email",$request["email"]);
+            Session::put("user",$user["nombreUser"]);
+            Session::put("home","Login successful");  
 
-            
-            return response()->json([
-                'message' => 'Login successful'
-            ]);
+     
+            return Session::all();
         }
 
         return response()->json([
@@ -68,7 +68,17 @@ class usuarioControler extends Controller
     }
     public function getSesion(Request $request){
         
-        return response()->json($request->session()->all());
+        return Session::all() ;
+    }
+    public function update(Request $request){
+        $registro = usuario::find($request);
+
+        // Actualiza los campos necesarios
+        $registro->campo1 = $request->campo1;
+        $registro->campo2 = $request->campo2;
+    
+        // Guarda los cambios en la base de datos
+        $registro->save();
     }
     
 

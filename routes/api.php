@@ -20,4 +20,4 @@ use App\Http\Controllers\usuarioControler;
 });*/
 Route::apiResource('usuario',usuarioControler::class);
 Route::match(['get', 'post'], '/log', [usuarioControler::class,'log']);
-Route::get('/secion', [usuarioControler::class,'getSesion']);
+Route::get('/secion', [usuarioControler::class,'getsesion']);

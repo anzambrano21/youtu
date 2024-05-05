@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text("nombreUser");
             $table->text("email");
             $table->text("contraseña");
+            $table->text("estado");
             $table->timestamps();
         });
     }
