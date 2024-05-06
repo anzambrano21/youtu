@@ -18,8 +18,9 @@ function Prin() {
             <Routes>
                 <Route path='/' element={<Inicio/>}/>
                 <Route path='/registro' element={<Registro/>} />
-                <Route path='/admin' element={<Adimistrador/>}/>
+                
                 <Route path='/home' element={<Principal/>}/>
+                <Route path='/admin' element={<Adimistrador/>}/>
             </Routes>
 
             

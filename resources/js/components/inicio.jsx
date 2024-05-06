@@ -158,7 +158,12 @@ export const Registro = () => {
         const response = await axios.post('/api/usuario', guar);
 
         console.log(response.data);
-
+        if (response.data.home === 'Login successful') {
+            // Redirige al usuario a la página deseada
+            window.location.href = '/home';
+        } else {
+            alert("registro fallido");
+        }
 
 
 

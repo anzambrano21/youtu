@@ -9,12 +9,15 @@ const itemsPerPage = 5;
 let res = await fetch('http://127.0.0.1:8000/api/usuario');
 let myData = await res.json();
 let data2 = myData;
-console.log(data2);
+
 
 
 export const Adimistrador = () => {
   const example = useContext(Exaplecontect)
-  console.log(example);
+  if (example["datos"]["rol"]!==1){
+    window.location.href = '/home';
+  }
+  
   return (
     <div >
 
