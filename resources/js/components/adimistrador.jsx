@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import '../../css/admin.css'
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
 import { Exaplecontect } from "../context/contexto"
-
+import {Navigate } from 'react-router-dom';
 const itemsPerPage = 5;
 let res = await fetch('http://127.0.0.1:8000/api/usuario');
 let myData = await res.json();
@@ -15,14 +14,14 @@ let data2 = myData;
 export const Adimistrador = () => {
   const example = useContext(Exaplecontect)
   if (example["datos"]["rol"]!==1){
-    window.location.href = '/home';
+    return(<Navigate to="/home" />);
   }
   
   return (
     <div >
 
       <header className="main-header">
-        <label htmlFor="btn-nav" className="btn-nav"><i className="fas fa-bars"></i></label>
+        <label htmlFor="btn-nav" className="btn-nav"><i className="fas fa-bars">=</i></label>
         <input type="checkbox" id="btn-nav" />
 
         <nav>

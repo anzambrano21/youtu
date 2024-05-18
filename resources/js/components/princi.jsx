@@ -11,7 +11,7 @@ import {Principal} from "./principal"
 
 function Prin() {
     const example=useContext(Exaplecontect)
-
+    
     return (
         <BrowserRouter>
             

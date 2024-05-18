@@ -29,7 +29,11 @@ class usuarioControler extends Controller
             'email' => 'required|email',
             'password' => 'required|min:3',
         ]);
-
+        $user1 = usuario::where('email', $request['email'])->first();
+        if($user1!=null){
+            Session::put("home", "El correo ya fue registrado");
+            return Session::all();
+        }
         $user = usuario::create([
             'nombreUser' => $request->nombreUser,
             'email' => $request->email,
@@ -52,8 +56,9 @@ class usuarioControler extends Controller
     public function log(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        
         if (Auth::attempt($credentials)) {
+            
             $user = usuario::where('email', $credentials['email'])->first();
 
             if ($user["est"] == "activado") {
@@ -63,7 +68,7 @@ class usuarioControler extends Controller
                 Session::put("rol", $user["admin"]);
                 return Session::all();
             }
-            Session::put("home", "Invalid credentials");
+            Session::put("home", "Usuario Desconocido");
 
 
             return Session::all();

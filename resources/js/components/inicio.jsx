@@ -7,8 +7,9 @@ import  {Exaplecontect} from "../context/contexto"
 
 
 export const Inicio = () => {
+    
     const example=useContext(Exaplecontect)
-
+    
 
     const iniciar = async () => {
         let user = document.getElementById("loginName").value;
@@ -18,7 +19,7 @@ export const Inicio = () => {
             password: pasw
         }
         const response = await axios.post('/api/log', usur);
-        
+        console.log(response);
         example.setDatos(response.data)
         
         if (response.data.home === 'Login successful') {
@@ -27,8 +28,6 @@ export const Inicio = () => {
         } else {
             alert("inicio de secion fallida");
         }
-
-
     }
     return (
         <div className="container1">
@@ -38,7 +37,7 @@ export const Inicio = () => {
                 <div className="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                     <form>
                         <div className="text-center mb-3">
-                            <p>Sign in with:</p>
+                            <p></p>
                             <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
                                 <i className="fab fa-facebook-f"></i>
                             </button>
@@ -56,42 +55,25 @@ export const Inicio = () => {
                             </button>
                         </div>
 
-                        <p className="text-center">or:</p>
+   
 
 
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="email" id="loginName" className="form-control" />
-                            <label className="form-label" htmlFor="loginName">Email or username</label>
+                            <label className="form-label" htmlFor="loginName">Correo</label>
                         </div>
 
 
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="password" id="loginPassword" className="form-control" />
-                            <label className="form-label" htmlFor="loginPassword">Password</label>
+                            <label className="form-label" htmlFor="loginPassword">Contraceña</label>
                         </div>
 
-
-                        <div className="row mb-4">
-                            <div className="col-md-6 d-flex justify-content-center">
-
-                                <div className="form-check mb-3 mb-md-0">
-                                    <input className="form-check-input" type="checkbox" value="" id="loginCheck" />
-                                    <label className="form-check-label" htmlFor="loginCheck"> Remember me </label>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6 d-flex justify-content-center">
-
-                                <a href="#!">Forgot password?</a>
-                            </div>
-                        </div>
-
-
-                        <button type="button" onClick={iniciar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">Sign in</button>
+                        <button type="button" onClick={iniciar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">Iniciar</button>
 
 
                         <div className="text-center">
-                            <p>Not a member? <a href="#!">Register</a></p>
+                            <p>Estas Registrado <a href="http://127.0.0.1:8000/registro">Registrar</a></p>
                         </div>
                     </form>
                 </div>
@@ -127,11 +109,11 @@ export const Navega = () => {
             <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <Link className="nav-link" id="tab-login" data-mdb-pill-init to="/" role="tab"
-                        aria-controls="pills-login" aria-selected="true" style={estilo}>Login</Link>
+                        aria-controls="pills-login" aria-selected="true" style={estilo}>Iniciar Secion</Link>
                 </li>
                 <li className="nav-item" role="presentation">
                     <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/registro" role="tab"
-                        aria-controls="pills-register" aria-selected="false" style={estilo2}>Register</Link>
+                        aria-controls="pills-register" aria-selected="false" style={estilo2}>Registrarce</Link>
                 </li>
             </ul>
         </div>
@@ -139,7 +121,8 @@ export const Navega = () => {
 
 }
 export const Registro = () => {
-
+    const example=useContext(Exaplecontect)
+    
     const guardar = async () => {
         let user = document.getElementById("registerUsername").value;
         let emai = document.getElementById("registerEmail").value;
@@ -159,6 +142,7 @@ export const Registro = () => {
 
         console.log(response.data);
         if (response.data.home === 'Login successful') {
+            example.setDatos(response.data)
             // Redirige al usuario a la página deseada
             window.location.href = '/home';
         } else {
@@ -175,7 +159,7 @@ export const Registro = () => {
                 <div className="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                     <form>
                         <div className="text-center mb-3">
-                            <p>Sign up with:</p>
+                            <p></p>
                             <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1">
                                 <i className="fab fa-facebook-f"></i>
                             </button>
@@ -194,38 +178,32 @@ export const Registro = () => {
                         </div>
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="text" id="registerUsername" className="form-control" />
-                            <label className="form-label" htmlFor="registerUsername">Username</label>
+                            <label className="form-label" htmlFor="registerUsername">Nombre de Usuario</label>
                         </div>
 
 
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="email" id="registerEmail" className="form-control" />
-                            <label className="form-label" htmlFor="registerEmail">Email</label>
+                            <label className="form-label" htmlFor="registerEmail">Correo </label>
                         </div>
 
 
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="password" id="registerPassword" className="form-control" />
-                            <label className="form-label" htmlFor="registerPassword">Password</label>
+                            <label className="form-label" htmlFor="registerPassword">Contraseña</label>
                         </div>
 
 
                         <div data-mdb-input-init className="form-outline mb-4">
                             <input type="password" id="registerRepeatPassword" className="form-control" />
-                            <label className="form-label" htmlFor="registerRepeatPassword">Repeat password</label>
+                            <label className="form-label" htmlFor="registerRepeatPassword">Repite Contraseña</label>
                         </div>
 
 
-                        <div className="form-check d-flex justify-content-center mb-4">
-                            <input className="form-check-input me-2" type="checkbox" value="" id="registerCheck"
-                                aria-describedby="registerCheckHelpText" />
-                            <label className="form-check-label" htmlFor="registerCheck">
-                                I have read and agree to the terms
-                            </label>
-                        </div>
 
 
-                        <button type="button" onClick={guardar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-3">Sign in</button>
+
+                        <button type="button" onClick={guardar} data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-3">Registrar</button>
                     </form>
                 </div>
             </div>

@@ -1,0 +1,16 @@
+footer{
+    
+    position:   absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #EAEA12;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.562), 0 6px 20px 0 rgba(0, 0, 0, 0.772);
+}
+body{
+    position: relative;
+    border: #ea1212;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    overflow-y: scroll;
+}
