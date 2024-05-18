@@ -14,3 +14,22 @@ body{
     padding-bottom: 60px;
     overflow-y: scroll;
 }
+.card{
+    background-color: #ebeb51;
+}
+.banner{
+    background-image: url('./imagen/Emporda-Alamy.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 210vh;  /* Cambia esto al ancho que desees */
+    height: 200px; /* Cambia esto a la altura que desees */
+
+}
+.nav{
+    display: flex !important;
+    justify-content: space-between !important;
+}
+.items{
+    display: flex;
+}
