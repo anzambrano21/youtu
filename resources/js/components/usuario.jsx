@@ -46,7 +46,6 @@ export const Cambiardat = () => {
             <div className="containe">
                 <div className='nombreap'>
                     <div className="row">{/* foto nombre apellido cedula */}
-
                         <div className="col">
 
                         </div>
