@@ -6,31 +6,44 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import "../../css/datuser.css"
 
+import { Exaplecontect } from "../context/contexto";
+
 export const Cambiardat = () => {
+    const example = useContext(Exaplecontect)
+    console.log(example);
+    function admin(){
+      if (example["datos"]["rol"]===1) {
+          return (      
+          <Typography variant="h6" >
+          <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/admin" role="tab"
+            aria-controls="pills-register" aria-selected="false" >admin</Link>
+        </Typography>)
+  
+  
+      }
+    }
     return (
         <div className="datosUsuser">
-            <AppBar position="static" style={{ backgroundColor: '#EAEA12' }}>
-                <Toolbar className='nav'>
-                    <Typography variant="h6">
-                        youtube amarillo
-                    </Typography>
-                    <div className='items'>
-                        <Typography variant="h6"  >
-                            <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/" role="tab"
-                                aria-controls="pills-register" aria-selected="false" >usuario</Link>
-                        </Typography>
-                        <Typography variant="h6" >
-                            <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/admin" role="tab"
-                                aria-controls="pills-register" aria-selected="false" >admin</Link>
-                        </Typography>
-                    </div>
+     <AppBar position="static" style={{ backgroundColor: '#EAEA12' }}>
+        <Toolbar className='nav'>
+          <Typography variant="h5">
+            Youtube Amarillo
+          </Typography>
+          <div className='items'>
+            <Typography variant="h6" >
+              <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/home" role="tab"
+                aria-controls="pills-register" aria-selected="false" >Home</Link>
+            </Typography>
+            {admin()}
+
+          </div>
 
 
-                </Toolbar>
-            </AppBar>
+        </Toolbar>
+      </AppBar>
 
 
-            <div className="container">
+            <div className="containe">
                 <div className='nombreap'>
                     <div className="row">{/* foto nombre apellido cedula */}
 

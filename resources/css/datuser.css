@@ -1,4 +1,4 @@
-.container {
+.containe {
     position: absolute;
     background-color: #EAEA12;
     height: 50%;
@@ -12,9 +12,8 @@
     -webkit-box-shadow: -22px 22px 28px -30px rgba(0,0,0,1);
     -moz-box-shadow: -22px 22px 28px -30px rgba(0,0,0,1);
     box-shadow: -22px 22px 28px -30px rgba(0,0,0,1);
-
-.ubicacion,
-.nombreap {
+}
+.ubicacion,.nombreap {
 
     margin: 5%;
 }
