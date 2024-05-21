@@ -1,9 +1,9 @@
 .containe {
     position: absolute;
     background-color: #EAEA12;
-    height: 50%;
-    width: 50%;
-    top: 0;
+    height: 80%;
+    width: 60%;
+    top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -17,3 +17,10 @@
 
     margin: 5%;
 }
+.img-redonda {
+    width: 100px; /* Ancho de la imagen */
+    height: 100px; /* Alto de la imagen */
+    border-radius: 50%; /* Esto hace que la imagen sea redonda */
+    object-fit: cover; /* Esto hace que la imagen cubra todo el espacio disponible, manteniendo su aspecto */
+}
+
