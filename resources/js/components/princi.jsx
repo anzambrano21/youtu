@@ -6,6 +6,7 @@ import { Inicio, Navega,Registro } from './inicio'
 import {Adimistrador} from "./adimistrador";
 import ExamplecontexProvier, {Exaplecontect}from "../context/contexto"
 import {Principal} from "./principal"
+import {Cambiardat} from "./usuario"
 
 
 
@@ -21,6 +22,7 @@ function Prin() {
                 
                 <Route path='/home' element={<Principal/>}/>
                 <Route path='/admin' element={<Adimistrador/>}/>
+                <Route path='user' element={<Cambiardat/>}/>
             </Routes>
 
             
