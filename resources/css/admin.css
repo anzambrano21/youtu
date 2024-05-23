@@ -15,9 +15,10 @@
   
   .main-header{
     position: absolute;
-    background: #00ffaa;
+    background: #EAEA12 ;
     width: 100%;
-    height:50px;
+    height:65px;
+    margin-bottom: 65px;
   }
   
   nav{
@@ -27,7 +28,7 @@
     width: 200px;
     top:50px;
     height:calc(100vh - 50px);
-    background:#00ffaa;
+    background:#ebeb51;
     transform:translateX(-100%);
     transition:.4s ease;
   }
@@ -79,7 +80,7 @@
   }
   .conTabl,.contaiP{
     position: absolute;
-    background-color: #00ffaa;
+    background-color: #EAEA12;
     width:calc(150vh - 80px);
     height: calc(150vh - 500px);
     margin-top: 10%;

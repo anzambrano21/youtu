@@ -9,9 +9,31 @@ let res = await fetch('http://127.0.0.1:8000/api/usuario');
 let myData = await res.json();
 let data2 = myData;
 
+const modi = await fetch(`api/color/${1}`)
+const modis = await modi.json();
+let stilos={
+  
+};
+let estilos2 = {
+  
+}
+let  estilo3 = {
+
+}
 
 
-
+if (modis[0].est === 1) {
+  stilos = {
+    backgroundColor: modis[0].colorP
+  }
+  estilos2 = {
+    backgroundColor: modis[0].colorS
+  }
+  estilo3 = {
+    color: modis[0].colorC,
+    fontSize: modis[0].tamP.toString() + "px"
+  }
+}
 
 
 
@@ -26,16 +48,16 @@ export const Adimistrador = () => {
   return (
     <div >
 
-      <header className="main-header">
+      <header className="main-header" style={stilos}>
         <label htmlFor="btn-nav" className="btn-nav"><i className="fas fa-bars">=</i></label>
         <input type="checkbox" id="btn-nav" />
 
-        <nav>
+        <nav style={estilos2}>
           <ul className="navigation">
-            <li><a href="">Home</a></li>
-            <li><a href="">Servicios</a></li>
-            <li><a href="">Nosotros</a></li>
-            <li><a href="">Contacto</a></li>
+            <li><a href="" style={estilo3}>Home</a></li>
+            <li><a href="" style={estilo3}>Servicios</a></li>
+            <li><a href="" style={estilo3}>Nosotros</a></li>
+            <li><a href="" style={estilo3}>Contacto</a></li>
           </ul>
         </nav>
 
@@ -162,32 +184,32 @@ export const CutomTable = () => {
   );
 };
 export const CambiarColor = () => {
-  const cargar=async ()=>{
-    let cp=document.getElementById("cP").value;
-    let cs=document.getElementById("cS").value;
-    let cc=document.getElementById("cC").value;
-    let tp=document.getElementById("tP").value;
-    let tt=document.getElementById("tT").value
-    let ts=document.getElementById("tS").value
-    let tb=document.getElementById("tB").value
-    let mod={
-      Cp:cp,
-      Cs:cs,
-      Cc:cc,
-      Tp:tp,
-      Tt:tt,
-      Ts:ts,
-      Tb:tb,
-      st:1
+  const cargar = async () => {
+    let cp = document.getElementById("cP").value;
+    let cs = document.getElementById("cS").value;
+    let cc = document.getElementById("cC").value;
+    let tp = document.getElementById("tP").value;
+    let tt = document.getElementById("tT").value
+    let ts = document.getElementById("tS").value
+    let tb = document.getElementById("tB").value
+    let mod = {
+      Cp: cp,
+      Cs: cs,
+      Cc: cc,
+      Tp: tp,
+      Tt: tt,
+      Ts: ts,
+      Tb: tb,
+      st: 1
     }
     console.log(mod);
     const response = await axios.put(`api/color/${1}`, mod);
-    
+
 
   }
-  const desactivar=async ()=>{
-    let mod={
-      st:0
+  const desactivar = async () => {
+    let mod = {
+      st: 0
 
     }
     const response = await axios.put(`api/color/${1}`, mod);
@@ -195,38 +217,38 @@ export const CambiarColor = () => {
   }
 
   return (
-    <div className='contaiP'>
+    <div className='contaiP' style={stilos}>
       <div className='contaiColor'>
         <div className="row justify-content-center">
-          <p className="col-3">color primario</p>
+          <p className="col-3" style={estilo3}>color primario</p>
           <input type="color" name="" id="cP" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">color secundario</p>
+          <p className="col-3" style={estilo3}>color secundario</p>
           <input type="color" name="" id="cS" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">color complementario</p>
+          <p className="col-3" style={estilo3}>color complementario</p>
           <input type="color" name="" id="cC" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">tamaño de parrafo</p>
+          <p className="col-3" style={estilo3}>tamaño de parrafo</p>
           <input type="number" name="" id="tP" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">tamaño de titulos</p>
+          <p className="col-3" style={estilo3}>tamaño de titulos</p>
           <input type="number" name="" id="tT" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">tamaño de subtitulos</p>
+          <p className="col-3" style={estilo3}>tamaño de subtitulos</p>
           <input type="number" name="" id="tS" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          <p className="col-3">tamaño de botones</p>
+          <p className="col-3" style={estilo3}>tamaño de botones</p>
           <input type="number" name="" id="tB" className="col-5" />
         </div>
         <div className="row justify-content-center">
-          
+
           <input type="button" value="cargar" className='col-2' onClick={cargar} />
           <input type="button" value="desactivar" className='col-2' onClick={desactivar} />
         </div>

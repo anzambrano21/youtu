@@ -43,9 +43,10 @@ class ColorController extends Controller
      * @param  \App\Models\color  $color
      * @return \Illuminate\Http\Response
      */
-    public function show(color $color)
+    public function show($color)
     {
-        //
+        $wallet = color::where("id", $color)->get();
+        return response()->json($wallet);
     }
     /**
      * Update the specified resource in storage.

@@ -8,13 +8,48 @@ import "../../css/datuser.css"
 import { useDropzone } from "react-dropzone";
 import { Exaplecontect } from "../context/contexto";
 import axios from 'axios';
+const modi = await fetch(`api/color/${1}`)
+const modis = await modi.json();
+let stilos={
+
+};
+let estilos2 = {
+  
+}
+let  estilo3 = {
+
+}
+let estilo4={
+
+}
+let estilo5={
+
+}
+if (modis[0].est === 1) {
+  stilos = {
+    backgroundColor: modis[0].colorP
+  }
+  estilos2 = {
+    backgroundColor: modis[0].colorS
+  }
+  estilo3 = {
+    color: modis[0].colorC,
+    fontSize: modis[0].tamP.toString() + "px"
+  }
+  estilo4={
+    color: modis[0].colorC,
+    fontSize: modis[0].tamSub.toString() + "px"
+  }
+  estilo5={
+    color: modis[0].colorC,
+    fontSize: modis[0].tamT.toString() + "px"
+  }
+}
 export const Cambiardat = () => {
     const example = useContext(Exaplecontect)
-    
     const [files, setFiles] = useState([]);
     const [isImageLoaded, setIsImageLoaded] = useState(false); // Nuevo estado
     const [imagePath, setImagePath] = useState('');
-
     const onDrop = useCallback((acceptedFiles) => {
         setFiles(
             acceptedFiles.map((file) => {
@@ -27,7 +62,6 @@ export const Cambiardat = () => {
         );
         setIsImageLoaded(true);
     }, []);
-
     const { getRootProps, getInputProps } = useDropzone({ 
         onDrop,
         onDropAccepted: () => {
@@ -37,17 +71,15 @@ export const Cambiardat = () => {
         maxFiles: 1, // Acepta solo un archivo
         onDropRejected: () => alert('Por favor, sube solo imágenes.'), // Alerta si el archivo no es una imagen
     });
-
     const fileList = files.map((file, index) => (
         <img key={index} src={file.preview} alt={file.name} className="img-redonda" />
     ));
-
     function admin() {
         if (example["datos"]["rol"] === 1) {
             return (
                 <Typography variant="h6" >
                     <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/admin" role="tab"
-                        aria-controls="pills-register" aria-selected="false" >admin</Link>
+                        aria-controls="pills-register" aria-selected="false" style={estilo4}>admin</Link>
                 </Typography>)
         }
     }
@@ -75,75 +107,67 @@ export const Cambiardat = () => {
     }
     return (
         <div className="datosUsuser">
-            <AppBar position="static" style={{ backgroundColor: '#EAEA12' }}>
+            <AppBar position="static" className='navb' style={stilos}>
                 <Toolbar className='nav'>
-                    <Typography variant="h5">
+                    <Typography variant="h5" style={estilo5}>
                         Youtube Amarillo
                     </Typography>
                     <div className='items'>
                         <Typography variant="h6" >
                             <Link className="nav-link" id="tab-register" data-mdb-pill-init to="/home" role="tab"
-                                aria-controls="pills-register" aria-selected="false" >Home</Link>
+                                aria-controls="pills-register" aria-selected="false" style={estilo4}>Home</Link>
                         </Typography>
                         {admin()}
 
                     </div>
-
-
                 </Toolbar>
             </AppBar>
-
-
-            <div className="containe">
+            <div className="containe" style={stilos}>
                 <div className='nombreap'>
                     <div className="row">{/* foto nombre apellido cedula */}
                         <div className="col">
                             <div {...getRootProps()}>
                                 <input {...getInputProps()} />
-                                {!isImageLoaded && <p>Arrastra y suelta tus archivos aquí, o haz clic para seleccionar archivos</p>}
+                                {!isImageLoaded && <p style={estilo3}>Arrastra y suelta tus archivos aquí, o haz clic para seleccionar archivos</p>}
                                 <ul>{fileList}</ul>
                             </div>
                         </div>
-
                         <div className="col-7">
                             <div className="container2">
                                 <div className="row">
-                                    <p className='col-3'>Nombre</p>
+                                    <p className='col-3' style={estilo3}>Nombre</p>
                                     <input type="text" id="nombre" className="col" />
                                 </div>
                                 <div className="row">
-                                    <p className='col-3'>Apellido</p>
+                                    <p className='col-3' style={estilo3}>Apellido</p>
                                     <input type="text" id="apellido" className="col" />
                                 </div>
                                 <div className="row">
-                                    <p className='col-3'>Cedula</p>
+                                    <p className='col-3' style={estilo3}>Cedula</p>
                                     <input type="number" id="CI" className="col" />
                                 </div>
                             </div>
 
                         </div>
-
-
-
                     </div>
                 </div>
                 <div className='ubicacion'>
 
                     <div className="row">
-                        <p className="col-2">Correo</p>
+                        <p className="col-2" style={estilo3}>Correo</p>
                         <input type="email" className="col" id='correo' />
                     </div>
                     <div className="row">
-                        <p className="col-2">Direccion</p>
+                        <p className="col-2" style={estilo3}>Direccion</p>
                         <input type="text" className="col" id='direc' />
                     </div>
                     <div className="row">
-                        <p className='col-2'>contraseña actual</p>
+                        <p className='col-2' style={estilo3}>contraseña actual</p>
                         <input type="text" className='col' id='conA'/>
 
                     </div>
                     <div className="row">
-                        <p className='col-2'>contraseña nueva</p>
+                        <p className='col-2' style={estilo3}>contraseña nueva</p>
                         <input type="text" className='col' id='conN' />
                     </div>
                     <div className="row">
@@ -165,13 +189,8 @@ export const Cambiardat = () => {
                         </select>
                         <input type="button" value="guardar" className='col-2' onClick={guardar}/>
                     </div>
-
-
                 </div>
-
-
             </div>
-
         </div>
     )
 }

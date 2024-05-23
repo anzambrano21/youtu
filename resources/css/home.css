@@ -26,6 +26,9 @@ body{
     height: 200px; /* Cambia esto a la altura que desees */
 
 }
+.naver{
+    background-color: #EAEA12 ;
+}
 .nav{
     display: flex !important;
     justify-content: space-between !important;
