@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import '../../css/admin.css'
 import { Button } from 'react-bootstrap';
 import { Exaplecontect } from "../context/contexto"
-import {Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 const itemsPerPage = 5;
 let res = await fetch('http://127.0.0.1:8000/api/usuario');
 let myData = await res.json();
@@ -11,12 +11,18 @@ let data2 = myData;
 
 
 
+
+
+
+
+
+
 export const Adimistrador = () => {
   const example = useContext(Exaplecontect)
-  if (example["datos"]["rol"]!==1){
-    return(<Navigate to="/home" />);
+  if (example["datos"]["rol"] !== 1) {
+    return (<Navigate to="/home" />);
   }
-  
+
   return (
     <div >
 
@@ -34,7 +40,7 @@ export const Adimistrador = () => {
         </nav>
 
       </header>
-      <CutomTable />
+      <CambiarColor />
 
 
       <div className="footer">
@@ -126,7 +132,7 @@ export const CutomTable = () => {
                       Activar
                     </button>
                   )}
-                  </td>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -155,3 +161,78 @@ export const CutomTable = () => {
     </div>
   );
 };
+export const CambiarColor = () => {
+  const cargar=async ()=>{
+    let cp=document.getElementById("cP").value;
+    let cs=document.getElementById("cS").value;
+    let cc=document.getElementById("cC").value;
+    let tp=document.getElementById("tP").value;
+    let tt=document.getElementById("tT").value
+    let ts=document.getElementById("tS").value
+    let tb=document.getElementById("tB").value
+    let mod={
+      Cp:cp,
+      Cs:cs,
+      Cc:cc,
+      Tp:tp,
+      Tt:tt,
+      Ts:ts,
+      Tb:tb,
+      st:1
+    }
+    console.log(mod);
+    const response = await axios.put(`api/color/${1}`, mod);
+    
+
+  }
+  const desactivar=async ()=>{
+    let mod={
+      st:0
+
+    }
+    const response = await axios.put(`api/color/${1}`, mod);
+    console.log(response);
+  }
+
+  return (
+    <div className='contaiP'>
+      <div className='contaiColor'>
+        <div className="row justify-content-center">
+          <p className="col-3">color primario</p>
+          <input type="color" name="" id="cP" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">color secundario</p>
+          <input type="color" name="" id="cS" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">color complementario</p>
+          <input type="color" name="" id="cC" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">tamaño de parrafo</p>
+          <input type="number" name="" id="tP" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">tamaño de titulos</p>
+          <input type="number" name="" id="tT" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">tamaño de subtitulos</p>
+          <input type="number" name="" id="tS" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          <p className="col-3">tamaño de botones</p>
+          <input type="number" name="" id="tB" className="col-5" />
+        </div>
+        <div className="row justify-content-center">
+          
+          <input type="button" value="cargar" className='col-2' onClick={cargar} />
+          <input type="button" value="desactivar" className='col-2' onClick={desactivar} />
+        </div>
+
+
+      </div>
+    </div>
+  );
+}

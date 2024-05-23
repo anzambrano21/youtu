@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\usuarioControler;
-
+use App\Http\Controllers\ColorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,5 +19,7 @@ use App\Http\Controllers\usuarioControler;
     return $request->user();
 });*/
 Route::apiResource('usuario',usuarioControler::class);
+Route::apiResource('color',ColorController::class);
 Route::match(['get', 'post'], '/log', [usuarioControler::class,'log']);
 Route::get('/secion', [usuarioControler::class,'getsesion']);
+Route::post('/actu/{usuario}',[usuarioControler::class,'actualizar']);

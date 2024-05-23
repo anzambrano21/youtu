@@ -1,7 +1,6 @@
 .containe {
     position: absolute;
     background-color: #EAEA12;
-    height: 80%;
     width: 60%;
     top: 10%;
     bottom: 0;
@@ -23,4 +22,18 @@
     border-radius: 50%; /* Esto hace que la imagen sea redonda */
     object-fit: cover; /* Esto hace que la imagen cubra todo el espacio disponible, manteniendo su aspecto */
 }
+  /* Media query para pantallas de tamaño grande (desktop, etc.) */
+  @media screen and (max-height: 1075px) {
+    .containe {
+      height: 50%;
+      /* otros estilos... */
+    }
+}
+@media screen and (max-height: 800px) {
+    .containe {
+      height: 80%;
+      /* otros estilos... */
+    }
+}
+  
 

@@ -6,24 +6,26 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import "../../css/datuser.css"
 import { useDropzone } from "react-dropzone";
-
 import { Exaplecontect } from "../context/contexto";
-
+import axios from 'axios';
 export const Cambiardat = () => {
     const example = useContext(Exaplecontect)
     
     const [files, setFiles] = useState([]);
     const [isImageLoaded, setIsImageLoaded] = useState(false); // Nuevo estado
+    const [imagePath, setImagePath] = useState('');
 
     const onDrop = useCallback((acceptedFiles) => {
         setFiles(
-            acceptedFiles.map((file) =>
-                Object.assign(file, {
-                    preview: URL.createObjectURL(file),
-                })
-            )
+            acceptedFiles.map((file) => {
+                const objectUrl = URL.createObjectURL(file);
+                setImagePath(file); // Guarda la dirección de la imagen
+                return Object.assign(file, {
+                    preview: objectUrl,
+                });
+            })
         );
-        setIsImageLoaded(true); // Establece el estado a verdadero cuando se carga una imagen
+        setIsImageLoaded(true);
     }, []);
 
     const { getRootProps, getInputProps } = useDropzone({ 
@@ -36,10 +38,8 @@ export const Cambiardat = () => {
         onDropRejected: () => alert('Por favor, sube solo imágenes.'), // Alerta si el archivo no es una imagen
     });
 
-    const fileList = files.map((file) => (
-        
-            <img src={file.preview} alt={file.name} className="img-redonda" />
-        
+    const fileList = files.map((file, index) => (
+        <img key={index} src={file.preview} alt={file.name} className="img-redonda" />
     ));
 
     function admin() {
@@ -50,6 +50,28 @@ export const Cambiardat = () => {
                         aria-controls="pills-register" aria-selected="false" >admin</Link>
                 </Typography>)
         }
+    }
+    const guardar= async () => {
+        let nom=document.getElementById("nombre").value
+        let ape=document.getElementById("apellido").value
+        let CI=document.getElementById("CI").value
+        let email=document.getElementById("correo").value
+        let dir=document.getElementById("direc").value
+        let conA=document.getElementById("conA").value
+        let conN= document.getElementById("conN").value
+
+        const formData = new FormData();
+        formData.append('nombre', nom);
+        formData.append('apellido', ape);
+        formData.append('ci', CI);
+        formData.append('Email', email);
+        formData.append('Dir', dir);
+        formData.append('ConA', conA);
+        formData.append('ConN', conN);
+        formData.append('imagePath', imagePath); // Añade el archivo al FormData
+        
+        const response = await axios.post(`api/actu/${example.datos.email}`, formData);
+        console.log(response);
     }
     return (
         <div className="datosUsuser">
@@ -83,19 +105,19 @@ export const Cambiardat = () => {
                             </div>
                         </div>
 
-                        <div className="col">
+                        <div className="col-7">
                             <div className="container2">
                                 <div className="row">
-                                    <p className='col'>Nombre</p>
-                                    <input type="text" id="loginName" className="col" />
+                                    <p className='col-3'>Nombre</p>
+                                    <input type="text" id="nombre" className="col" />
                                 </div>
                                 <div className="row">
-                                    <p className='col'>Apellido</p>
-                                    <input type="text" id="loginName" className="col" />
+                                    <p className='col-3'>Apellido</p>
+                                    <input type="text" id="apellido" className="col" />
                                 </div>
                                 <div className="row">
-                                    <p className='col'>Cedula</p>
-                                    <input type="number" id="loginName" className="col" />
+                                    <p className='col-3'>Cedula</p>
+                                    <input type="number" id="CI" className="col" />
                                 </div>
                             </div>
 
@@ -109,24 +131,20 @@ export const Cambiardat = () => {
 
                     <div className="row">
                         <p className="col-2">Correo</p>
-                        <input type="text" className="col" />
-                    </div>
-                    <div className="row">
-                        <p className="col-2">RIF</p>
-                        <input type="text" className="col" />
+                        <input type="email" className="col" id='correo' />
                     </div>
                     <div className="row">
                         <p className="col-2">Direccion</p>
-                        <input type="text" className="col" />
+                        <input type="text" className="col" id='direc' />
                     </div>
                     <div className="row">
                         <p className='col-2'>contraseña actual</p>
-                        <input type="text" className='col' />
+                        <input type="text" className='col' id='conA'/>
 
                     </div>
                     <div className="row">
                         <p className='col-2'>contraseña nueva</p>
-                        <input type="text" className='col' />
+                        <input type="text" className='col' id='conN' />
                     </div>
                     <div className="row">
                         <select name="estado" id="" className='col-2' style={{ marginRight: "0.5%" }}>
@@ -145,7 +163,7 @@ export const Cambiardat = () => {
                             <option value="Lara">Lara</option>
                             <option value="Mérida">Mérida</option>
                         </select>
-                        <input type="button" value="guardar" className='col-2' />
+                        <input type="button" value="guardar" className='col-2' onClick={guardar}/>
                     </div>
 
 

@@ -101,6 +101,30 @@ class usuarioControler extends Controller
         $registro->save();
         return "listo";
     }
+    public function actualizar(Request $request, $id)  {
+        $user = usuario::where('email', $id)->first();
+        $registro = usuario::find($user["id"]);
+        
+        $imageName = time().'.'.$request->imagePath->extension();  
+        $request->imagePath->move(public_path('images'), $imageName);
+        
+        $registro->nombreUser=$request["nombre"];
+        
+        $registro->apellido=$request["apellido"];
+        $registro->ci=$request["ci"];
+        $registro->email=$request["Email"];
+        $registro->direc=$request["Dir"];
+        $registro->fotoP="/images/" . $imageName; 
 
+        
+        if(Hash::check($request["ConA"],$user["password"])){
+            $registro->password=Hash::make($request["ConN"]);
+        }
+        $registro->save();
+        return $request;
+        
+        
+        
+    }
 
 }

@@ -77,16 +77,26 @@
   .container{
     margin-left: none;
   }
-  .conTabl{
+  .conTabl,.contaiP{
     position: absolute;
     background-color: #00ffaa;
-    width:calc(150vh - 50px);
-    
+    width:calc(150vh - 80px);
+    height: calc(150vh - 500px);
     margin-top: 10%;
     margin-left: 25%;
   }
+  .contaiColor{
+    margin-top: 6%;
+  }
+
   .conBoton{
     position: absolute;
     margin-top: 30%;
     margin-left: 45%;
   }
+
+  input{
+    height: 3.9vh;
+  }
+
+  
