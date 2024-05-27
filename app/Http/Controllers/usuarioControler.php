@@ -38,6 +38,10 @@ class usuarioControler extends Controller
             'nombreUser' => $request->nombreUser,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'fotoP'=> "none",
+            'apellido'=> "none",
+            'direc'=> "none",
+            'ci'=>0
 
         ]);
         Session::put("email", $request["email"]);

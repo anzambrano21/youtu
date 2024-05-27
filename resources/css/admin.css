@@ -78,14 +78,33 @@
   .container{
     margin-left: none;
   }
-  .conTabl,.contaiP{
+  .conTabl{
     position: absolute;
     background-color: #EAEA12;
-    width:calc(150vh - 80px);
-    height: calc(150vh - 500px);
+    width:100vh;
+    height: 30vh;
     margin-top: 10%;
-    margin-left: 25%;
+    margin-left: 35%;
   }
+  .contaiP{
+    position: absolute;
+    background-color: #EAEA12;
+    width:100vh;
+    height: 50vh;
+    margin-top: 10%;
+    margin-left: 35%;
+  }
+  @media screen and (max-height: 800px) {
+    .contaiP{
+      position: absolute;
+      background-color: #EAEA12;
+      width:150vh;
+      height: 75vh;
+      margin-top: 6.5%;
+      margin-left: 23%;
+    }
+}
+  
   .contaiColor{
     margin-top: 6%;
   }
@@ -99,5 +118,7 @@
   input{
     height: 3.9vh;
   }
-
+  .enlace{
+    justify-content: flex-end;
+  }
   

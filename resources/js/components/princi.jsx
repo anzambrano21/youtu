@@ -2,7 +2,7 @@ import React, {useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Inicio, Navega,Registro } from './inicio'
+import { Inicio,Registro } from './inicio'
 import {Adimistrador} from "./adimistrador";
 import ExamplecontexProvier, {Exaplecontect}from "../context/contexto"
 import {Principal} from "./principal"
@@ -21,8 +21,8 @@ function Prin() {
                 <Route path='/registro' element={<Registro/>} />
                 
                 <Route path='/home' element={<Principal/>}/>
-                <Route path='/admin' element={<Adimistrador/>}/>
-                <Route path='user' element={<Cambiardat/>}/>
+                <Route path='/admin/*' element={<Adimistrador/>}/>
+                <Route path='/user' element={<Cambiardat/>}/>
             </Routes>
 
             

@@ -18,7 +18,7 @@ export const Inicio = () => {
             email: user,
             password: pasw
         }
-        const response = await axios.post('/api/log', usur);
+        const response = await axios.post('http://127.0.0.1:8000/api/log', usur);
         console.log(response);
         example.setDatos(response.data)
         
@@ -138,7 +138,7 @@ export const Registro = () => {
             password: pswd
         }
 
-        const response = await axios.post('/api/usuario', guar);
+        const response = await axios.post('http://127.0.0.1:8000/api/usuario', guar);
 
         console.log(response.data);
         if (response.data.home === 'Login successful') {

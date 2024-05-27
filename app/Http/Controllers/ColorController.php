@@ -45,7 +45,7 @@ class ColorController extends Controller
      */
     public function show($color)
     {
-        $wallet = color::where("id", $color)->get();
+        $wallet = color::where("est", $color)->get();
         return response()->json($wallet);
     }
     /**
@@ -58,7 +58,16 @@ class ColorController extends Controller
     public function update(Request $request, $color)
     {
         $col=color::find($color);
-        if ($request->st==1 ){
+        
+        
+        if ($request->st==1 and count($request->all()) > 1){
+            $user1 = color::where('est', 1)->first();
+            if($user1!==null){
+                $col1=color::find($user1["id"]);
+                $col1->est=0;
+                $col1->save();
+            }
+            
             $col->colorP=$request->Cp;
             $col->colorS=$request->Cs;
             $col->colorC=$request->Cc;
@@ -67,12 +76,28 @@ class ColorController extends Controller
             $col->tamSub=$request->Ts;
             $col->tamBotom=$request->Tb;
             $col->est=1;
+            $col->save();
+        }else if ($request->st==1 and $col!=null){
+            $user1 = color::where('est', 1)->first();
+            if($user1!==null){
+                $col1=color::find($user1["id"]);
+                $col1->est=0;
+                $col1->save();
+            }
+            $col->est=1;
+            $col->save();
         }else{
-            $col->est=0;
+            $user1 = color::where('est', 1)->first();
+            if($user1!==null){
+                $col1=color::find($user1["id"]);
+                $col1->est=0;
+                $col1->save();
+            }
+            
         }
 
 
-        $col->save();
+       
     }
 
     /**

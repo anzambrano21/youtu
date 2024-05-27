@@ -20,6 +20,10 @@ return new class extends Migration
             $table->text("password");
             $table->text("est")->default('activado');
             $table->boolean("admin")->default(false);
+            $table->text("fotoP");
+            $table->text("apellido");
+            $table->text("direc");
+            $table->integer("ci");
             $table->timestamps();
         });
     }

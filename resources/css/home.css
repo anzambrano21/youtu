@@ -29,10 +29,19 @@ body{
 .naver{
     background-color: #EAEA12 ;
 }
+a{
+
+    color:black !important;
+    text-decoration: none;
+}
+a:hover{
+    color:white !important;
+}
 .nav{
     display: flex !important;
     justify-content: space-between !important;
 }
 .items{
     display: flex;
+
 }
