@@ -30,7 +30,6 @@ let estilo5 = {
 let estilo6 = {
 
 }
-console.log(modis);
 
 if (modis.length === 1) {
   stilos = {
